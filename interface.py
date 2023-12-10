@@ -86,7 +86,7 @@ if submmited:
     status.write("Crawling related papers...")
     progress_text = "Đợi xíu đi kiếm tài liệu cho bạn nè 🏃‍♂️"
     my_bar = st.progress(0, text=progress_text)
-    for index in range(1):
+    for index in range(len(keyword_list)):
         search_result = search_paper(keyword_list[index], ",".join(related_field))
         try:
             list_of_paper_id, list_of_title, list_of_abstract, list_of_url, list_of_field_study, list_of_s2_field_study, list_of_publication_type, list_of_publication_date, list_of_authors, list_of_year, list_of_references, list_of_citation = parsing_api_result(search_result)
@@ -115,7 +115,7 @@ if submmited:
     for i in keyword_list:
         st.markdown("- " + i)
     result_df = pd.DataFrame(result)
-    st.data_editor(result_df, num_rows="dynamic", column_config={"url": st.column_config.LinkColumn("URL to website")})
+    st.data_editor(result_df, num_rows="dynamic", use_container_width=True, column_config={"url": st.column_config.LinkColumn("URL to website")})
     #parsing_api_result(search_result)
     
     

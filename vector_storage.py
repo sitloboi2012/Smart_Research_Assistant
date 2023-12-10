@@ -17,6 +17,8 @@ from pymilvus import (
 
 from constant import EMBEDDING_FUNC
 
+import streamlit as st
+
 
 class ZillizVectorDatabase:
     """
@@ -36,9 +38,9 @@ class ZillizVectorDatabase:
 
     def __init__(
         self,
-        cloud_uri: str = "https://in03-b839a352e24af63.api.gcp-us-west1.zillizcloud.com",
-        cloud_api_key: str = "ac7fdae203ef6b731136e454178d946f87353b422d3b5f40e4f573bf62d6b4c483da92b8e26776aa63008f1a35469b9ac50a5785",
-        collection_name: str = "Production",
+        cloud_uri: str = st.secrets["ZILLIZ_CLOUD_URI"],
+        cloud_api_key: str = st.secrets["ZILLIZ_API_KEY"],
+        collection_name: str = st.secrets["ZILLIZ_COLLECTION_NAME"],
         embedding_function: OpenAIEmbeddings = EMBEDDING_FUNC,
     ):
         """

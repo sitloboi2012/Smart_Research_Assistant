@@ -1,10 +1,5 @@
 from langchain.utilities.duckduckgo_search import DuckDuckGoSearchAPIWrapper
-from vector_storage import ZillizVectorDatabase
-from langchain.retrievers.zilliz import ZillizRetriever
-from langchain.vectorstores.zilliz import Zilliz
-from constant import EMBEDDING_FUNC, LLM_MODEL_4
 from langchain.tools.ddg_search.tool import DuckDuckGoSearchResults
-from question_generator import QuestionGenerator
 
 import requests
 
