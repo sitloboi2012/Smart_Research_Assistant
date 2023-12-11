@@ -1,6 +1,6 @@
 import re
 from pydantic import BaseModel, Field
-from constant import LLM_MODEL_4, EMBEDDING_FUNC
+from constant import LLM_MODEL_4_SUMMARIZE, EMBEDDING_FUNC
 from langchain.output_parsers import PydanticOutputParser
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
@@ -24,7 +24,7 @@ SUMMARIZE_PROMPT = PromptTemplate(
     <your summary>
     """
 )
-SUMMARIZE_CHAIN = LLMChain(llm = LLM_MODEL_4, prompt = SUMMARIZE_PROMPT)
+SUMMARIZE_CHAIN = LLMChain(llm = LLM_MODEL_4_SUMMARIZE, prompt = SUMMARIZE_PROMPT)
 
 async def summarize_abstract(abstract: str, title: str, study_field: str):
     response = await SUMMARIZE_CHAIN.acall({"abstract": abstract, "title": title, "study_field": study_field})

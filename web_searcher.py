@@ -3,6 +3,7 @@ from langchain.utilities.duckduckgo_search import DuckDuckGoSearchAPIWrapper
 from langchain.tools.ddg_search.tool import DuckDuckGoSearchResults
 
 import requests
+import streamlit as st
 
 """
 db = ZillizVectorDatabase()
@@ -64,11 +65,14 @@ def search_paper(keyword: str, field_of_study: str):
     data = {
         "query": keyword,
         "fieldsOfStudy": field_of_study,
-        "fields": "title,year,authors,abstract,citationCount,references,citations,s2FieldsOfStudy,url,publicationDate,journal,referenceCount,citationStyles,fieldsOfStudy"
+        "fields": "title,year,authors,abstract,citationCount,references,citations,s2FieldsOfStudy,url,publicationDate,journal,referenceCount,citationStyles,fieldsOfStudy",
+        "limit": 20
     }
-    BASE_URL = f"https://api.semanticscholar.org/graph/v1/paper/search?query={data['query']}&fieldsOfStudy={data['fieldsOfStudy']}&fields={data['fields']}"
+    BASE_URL = f"https://api.semanticscholar.org/graph/v1/paper/search?query={data['query']}&fieldsOfStudy={data['fieldsOfStudy']}&fields={data['fields']}&limit={data['limit']}"
     payload = {}
-    headers = {}
+    headers = {
+        'x-api-key': st.secrets["SEMANTIC_SCHOLAR_API"]
+    }
 
     response = requests.request("GET", BASE_URL, headers=headers, data=payload)
     

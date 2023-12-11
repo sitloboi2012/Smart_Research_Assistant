@@ -1,6 +1,6 @@
 import re
 from pydantic import BaseModel, Field
-from constant import LLM_MODEL_4, EMBEDDING_FUNC
+from constant import LLM_MODEL_4_GENERATE, EMBEDDING_FUNC
 from langchain.output_parsers import PydanticOutputParser
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
@@ -27,7 +27,7 @@ FIRST_ROUND_KEYWORD_PROMPT = PromptTemplate(
     The list of keywords must be relevant to the topic of XR in Marketing and Business and can be search for more related work on Arxiv or Google Scholar.
     The list of keywords must aim to help user to find more relevant research papers, documents, articles, journals articles or publication that related to the topic and description of the project that the user ask.
     The keyword must be relevant to the topic of XR in Marketing and Business.
-    You must generate at least 3 keywords and at most 5 keywords.
+    You must generate at least 10 keywords and at most 20 keywords.
     Always make sure that the keywords are relevant to the topic of XR in Marketing and Business and the {topic}.
     
     Please do your best, this is very important to the user career.
@@ -68,7 +68,7 @@ FILTER_ROUND_KEYWORD_PROMPT = PromptTemplate(
 class QuestionGenerator:
     def __init__(
         self,
-        llm_model: ChatOpenAI = LLM_MODEL_4,
+        llm_model: ChatOpenAI = LLM_MODEL_4_GENERATE,
         first_round_template: PromptTemplate = FIRST_ROUND_KEYWORD_PROMPT,
         second_round_template: PromptTemplate = FILTER_ROUND_KEYWORD_PROMPT,
         output_parser: PydanticOutputParser = output_parser,
