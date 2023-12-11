@@ -126,7 +126,7 @@ if submmited:
     api_bar = st.progress(0, text=progress_text)
     current_progress = 0
     raw_result = []
-    for index in range(1):
+    for index in range(len(keyword_list)):
         search_result = search_paper(keyword_list[index], ",".join(related_field))
         with contextlib.suppress(KeyError):
             parse_dict = parsing_api_result(search_result)
