@@ -1,3 +1,4 @@
+from functools import lru_cache
 from langchain.utilities.duckduckgo_search import DuckDuckGoSearchAPIWrapper
 from langchain.tools.ddg_search.tool import DuckDuckGoSearchResults
 
@@ -54,6 +55,7 @@ In the final week, you will compile your insights and analyses into a comprehens
 This report will document your journey through the XR literature, key trends, and real-world applications.
 """
 
+@lru_cache 
 def web_search(query: str, num_results: int):
     results = ddg_search.results(query, num_results)
     return [{"link": r["link"], "title": r["title"]} for r in results]
@@ -62,7 +64,7 @@ def search_paper(keyword: str, field_of_study: str):
     data = {
         "query": keyword,
         "fieldsOfStudy": field_of_study,
-        "fields": "title,year,authors,abstract,citationCount,publicationTypes,references,citations,fieldsOfStudy,s2FieldsOfStudy,url,externalIds,publicationTypes,publicationDate,journal"
+        "fields": "title,year,authors,abstract,citationCount,references,citations,s2FieldsOfStudy,url,publicationDate,journal,referenceCount,citationStyles,fieldsOfStudy"
     }
     BASE_URL = f"https://api.semanticscholar.org/graph/v1/paper/search?query={data['query']}&fieldsOfStudy={data['fieldsOfStudy']}&fields={data['fields']}"
     payload = {}
